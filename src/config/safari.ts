@@ -1,9 +1,9 @@
-enum SafariWebAppCapable {
+export enum SafariWebAppCapable {
   YES = 'yes',
   NO = 'no'
 }
 
-enum SafariStatusBarStyle {
+export enum SafariStatusBarStyle {
   /**
    * The web content is displayed below a regular status bar.
    */
@@ -18,7 +18,7 @@ enum SafariStatusBarStyle {
   BLACK_TRANSLUCENT = 'black-translucent'
 }
 
-interface ISafariAsset {
+export interface ISafariAsset {
   src: string;
   /**
    * Array of integer numbers or strings.
@@ -43,7 +43,7 @@ interface ISafariAsset {
   destination?: string;
 }
 
-interface ISafariMaskIcon {
+export interface ISafariMaskIcon {
   /**
    * Use 100% black for all vectors with a transparent background in SVG format.
    *

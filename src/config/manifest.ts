@@ -19,7 +19,7 @@ enum OrientationLockType {
   LANDSCAPE_SECONDARY = 'landscape-secondary'
 }
 
-enum DisplayModeType {
+export enum DisplayModeType {
   FULLSCREEN = 'fullscreen',
   STANDALONE = 'standalone',
   MINIMAL_UI = 'minimal-ui',
@@ -29,7 +29,7 @@ enum DisplayModeType {
   BROWSER = 'browser'
 }
 
-enum TextDirectionType {
+export enum TextDirectionType {
   LTR = 'ltr',
   RTL = 'rtl',
   /**
@@ -38,7 +38,7 @@ enum TextDirectionType {
   AUTO = 'auto'
 }
 
-enum ServiceWorkerUpdateViaCache {
+export enum ServiceWorkerUpdateViaCache {
   /**
    * Default value.
    */
@@ -47,7 +47,7 @@ enum ServiceWorkerUpdateViaCache {
   NONE = 'none'
 }
 
-enum WorkerType {
+export enum WorkerType {
   /**
    * Default value.
    */
@@ -55,14 +55,14 @@ enum WorkerType {
   MODULE = 'module'
 }
 
-interface IServiceWorkerRegistrationObject {
+export interface IServiceWorkerRegistrationObject {
   src: string;
   scope?: string;
   type?: WorkerType;
   update_via_cache?: ServiceWorkerUpdateViaCache;
 }
 
-interface IImageResource {
+export interface IImageResource {
   src: string;
   sizes?: string;
   type?: string;
@@ -70,12 +70,12 @@ interface IImageResource {
   platform?: string;
 }
 
-interface IFingerprint {
+export interface IFingerprint {
   type?: string;
   value?: string;
 }
 
-interface IExternalApplicationResource {
+export interface IExternalApplicationResource {
   platform: string;
   url?: string;
   id?: string;

@@ -40,13 +40,45 @@ Type: `ISafariOptions`
 
 Safari-specific options.
 
-## Example
+### Default value
 
 ```javascript
-import PwaManifestEngine from 'pwa-manifest-engine'
+{
+  options: {
+    publicPath: undefined,
+    injectHtml: true,
+    includeDirectory: true,
+    manifest: {
+      crossOrigin: 'none',
+      filename: 'manifest.webmanifest',
+      destination: '/'
+    },
+    icons: {
+      filename: '[name]_[size].[hash][ext]',
+      destination: '/'
+    }
+  },
+  manifest: {
+    name: 'App',
+    dir: 'auto',
+    display: 'browser',
+    prefer_related_applications: false
+  },
+  safari: {
+    webAppCapable: 'yes',
+    webAppTitle: 'App',
+    webAppStatusBarStyle: 'default'
+  }
+}
+```
+
+## Full Example
+
+```javascript
+import { PwaManifestEngine } from 'pwa-manifest-engine'
 
 export const pwaManifest = new PwaManifestEngine({
-  output: { // default values, plugin config
+  options: { // default values, plugin config
     publicPath: null, // default value, plugin config
     injectHtml: true, // default value, plugin config
     includeDirectory: true, // default value, plugin config

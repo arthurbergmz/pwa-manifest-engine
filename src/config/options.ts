@@ -1,16 +1,16 @@
-enum IEngineOptionsCrossOrigin {
+export enum IEngineOptionsCrossOrigin {
   NONE = 'none',
   ANONYMOUS = 'anonymous',
   USE_CREDENTIALS = 'use-credentials'
 }
 
-interface IEngineOptionsManifest {
+export interface IEngineOptionsManifest {
   crossOrigin?: IEngineOptionsCrossOrigin;
   filename?: string;
   destination?: string;
 }
 
-interface IEngineOptionsIcons {
+export interface IEngineOptionsIcons {
   filename?: string;
   destination?: string;
 }
