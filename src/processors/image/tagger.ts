@@ -1,6 +1,6 @@
 import path from 'path'
 import { IImageData, IImageTag } from '.';
-import { generateFingerprint } from '../utils';
+import { generateFingerprint } from '../../utils';
 
 /**
  * Generates tags/placehoders from an image input.

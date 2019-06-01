@@ -1,6 +1,6 @@
 import { getTestingAssetPath, getBufferFromAsset } from "../assets";
-import { IImageResizedData, initImageResizedData } from "../../src/image";
-import { imageTagger } from "../../src/image/tagger";
+import { IImageResizedData, initImageResizedData } from "../../src/processors/image";
+import { imageTagger } from "../../src/processors/image/tagger";
 
 const localResizedImagePath: string = getTestingAssetPath('icon-128x128.png')
 const localResizedImage: IImageResizedData = initImageResizedData(getBufferFromAsset('icon-128x128.png'), 'image/png', 128, 128, 200, 200)

@@ -21,6 +21,7 @@ Engine settings.
 Type: `IWebAppManifest`
 
 Regular manifest options.
+If you don't want it to be processed anyhow, set its value to `undefined`.
 
 ### `icons`
 
@@ -39,6 +40,7 @@ Favicons to be processed by the engine.
 Type: `ISafariOptions`
 
 Safari-specific options.
+If you don't want it to be processed anyhow, set its value to `undefined`.
 
 ### Default value
 

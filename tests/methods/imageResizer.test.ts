@@ -1,6 +1,6 @@
 import { getTestingAssetPath, getBufferFromAsset } from "../assets";
-import { imageResizer } from "../../src/image/resizer";
-import { IImageResizedData, initImageResizedData } from "../../src/image";
+import { imageResizer } from "../../src/processors/image/resizer";
+import { IImageResizedData, initImageResizedData } from "../../src/processors/image";
 
 const localResizedImage: IImageResizedData = initImageResizedData(getBufferFromAsset('icon-128x128.png'), 'image/png', 128, 128, 200, 200)
 
