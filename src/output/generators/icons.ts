@@ -36,6 +36,7 @@ export interface IGeneratedEngineIcon {
  * @param resizedImage
  */
 function getGeneratedEngineIcon (engineOptions: IEngineOptions, engineIcon: IEngineIcon, resizedImage: IImageResizedData): IGeneratedEngineIcon {
+  // TODO: generate filename and destination based on placeholders
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { src: _removedSrc, type: _removedType, sizes: _removedSizes, filename, destination, ...properties } = engineIcon
   return { resizedImage, filename: (filename || (engineOptions.icons || {}).filename), destination: (destination || (engineOptions.icons || {}).destination), properties }

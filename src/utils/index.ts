@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import crypto from 'crypto'
 import { IImageDimensions } from '../processors/image';
+import jimp = require('jimp');
+
+export const supportedMimeTypes: string[] = [jimp.MIME_PNG, jimp.MIME_JPEG, jimp.MIME_BMP]
 
 export function extendTemplate (defaultTemplate: any, instance: any): {} {
   if (!instance) return defaultTemplate

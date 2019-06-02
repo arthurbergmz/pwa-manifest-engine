@@ -57,6 +57,8 @@
 		"README.md"
 	],
 	"dependencies": {
-		"jimp": "^0.6.4"
+		"@types/mime": "^2.0.1",
+		"jimp": "^0.6.4",
+		"mime": "^2.4.3"
 	}
 }
