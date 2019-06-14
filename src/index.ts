@@ -1,6 +1,6 @@
 import { IEngineConfig, defaultConfig } from './config'
-import { extendTemplate } from './utils';
-import { IEngineOutput } from './output';
+import { extendTemplate, generatedIconsToAsset, generateManifest } from './utils';
+import { IEngineOutput, IEngineAssetOutput } from './output';
 import { EngineCache } from './cache';
 import { generateCustomIcons } from './output/generators/icons'
 
@@ -23,8 +23,16 @@ export class PwaManifestEngine {
 
   public async run (): Promise<IEngineOutput> {
     const engineOptions = this._engineConfig.options || defaultConfig.options || {}
+    const engineManifest = this._engineConfig.manifest || defaultConfig.manifest || {}
     const customIcons = await generateCustomIcons(engineOptions, this._engineConfig.icons)
     console.log(customIcons)
-    return {}
+    return {
+      manifest: {
+        filename: (engineOptions.manifest || {}).filename || 'manifest.webmanifest', // TODO: placeholders/tags
+        content: generateManifest(engineManifest, customIcons),
+        assets: generatedIconsToAsset(customIcons),
+        crossOrigin: (engineOptions.manifest || {}).crossOrigin
+      }
+    }
   }
 }

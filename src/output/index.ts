@@ -2,7 +2,7 @@ import { IEngineConfig } from "../config";
 import { IWebAppManifest } from "../config/manifest";
 
 export interface IEngineAssetOutput {
-  filename: string;
+  filename?: string;
   buffer: Buffer;
 }
 
@@ -35,8 +35,10 @@ export interface ISafariOutput {
 }
 
 export interface IManifestOutput {
+  filename: string;
   content: IWebAppManifest;
-  files: IEngineAssetOutput[];
+  assets: IEngineAssetOutput[];
+  crossOrigin?: string;
 }
 
 export interface IEngineOutput {

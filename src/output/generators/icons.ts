@@ -1,7 +1,7 @@
 import { IEngineIcon } from "../../config/icons";
 import { IImageResizedData } from "../../processors/image";
 import { imageResizer } from "../../processors/image/resizer";
-import { formatSizesInput, formatTemplateByImageTags } from "../../utils";
+import { formatSizesInput, formatTemplateByTags } from "../../utils";
 import { imageFormatter } from "../../processors/image/formatter";
 import { IEngineOptions } from "../../config/options";
 import { imageTagger } from "../../processors/image/tagger";
@@ -41,7 +41,7 @@ function getGeneratedEngineIcon (engineOptions: IEngineOptions, engineIcon: IEng
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { src: _removedSrc, type: _removedType, sizes: _removedSizes, filename, destination, ...properties } = engineIcon
   const tags = imageTagger(engineIcon.src, resizedImage)
-  return { resizedImage, filename: formatTemplateByImageTags(filename || (engineOptions.icons || {}).filename || '[name]_[size].[hash][ext]', tags), destination: (destination || (engineOptions.icons || {}).destination), properties }
+  return { resizedImage, filename: formatTemplateByTags(filename || (engineOptions.icons || {}).filename || '[name]_[size].[hash][ext]', tags), destination: (destination || (engineOptions.icons || {}).destination), properties }
 }
 
 export function generateCustomIcons (engineOptions: IEngineOptions, engineIcons?: IEngineIcon[]): Promise<IGeneratedEngineIcon[][]> {

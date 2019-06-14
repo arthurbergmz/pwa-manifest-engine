@@ -26,8 +26,12 @@ export function imageTagger (src: string, imageData?: IImageData): IImageTag[] {
       key: /\[hash(\:\d{1,2})?\]/gi,
       value: generateFingerprint(imageData.buffer),
       transform: (value: string, applied: RegExpExecArray): string => {
-        const length = applied[1]
-        return value.substr(0, Math.min((length && +length) || 32, 32))
+        const requestedLength = applied[1]
+        if (requestedLength) {
+          const length = (applied[1] || ':32').substr(1)
+          return value.substr(0, Math.min(+length, 32)) // md5 max length is 32 characters
+        }
+        return value
       }
     })
   }

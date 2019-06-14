@@ -2,6 +2,9 @@
 import crypto from 'crypto'
 import { IImageDimensions, IImageTag } from '../processors/image';
 import jimp = require('jimp');
+import { IGeneratedEngineIcon } from '../output/generators/icons';
+import { IEngineAssetOutput } from '../output';
+import { IImageResource, IWebAppManifest } from '../config/manifest';
 
 export const supportedMimeTypes: string[] = [jimp.MIME_PNG, jimp.MIME_JPEG, jimp.MIME_BMP]
 
@@ -35,7 +38,7 @@ export function formatSizesInput (input: (string | number)): Dimension2D {
   return { x: -1, y: -1 }
 }
 
-export function formatTemplateByImageTags (template: string, imageTags: IImageTag[]): string {
+export function formatTemplateByTags (template: string, imageTags: IImageTag[]): string {
   return imageTags.reduce((output, tag) => {
     const applied = tag.key.exec(template)
     if (applied) {
@@ -46,4 +49,34 @@ export function formatTemplateByImageTags (template: string, imageTags: IImageTa
     }
     return output
   }, template)
+}
+
+export function generatedIconsToAsset (generatedIcons: IGeneratedEngineIcon[][]): IEngineAssetOutput[] {
+  const assets: IEngineAssetOutput[] = []
+  for (const generatedPack of generatedIcons) {
+    for (const generatedIcon of generatedPack) {
+      assets.push({ filename: generatedIcon.filename, buffer: generatedIcon.resizedImage.buffer })
+    }
+  }
+  return assets
+}
+
+export function combineIconsIntoManifest (regularIcons: IImageResource[], generatedIcons: IGeneratedEngineIcon[][]) {
+  const icons: IImageResource[] = [...regularIcons]
+  for (const generatedPack of generatedIcons) {
+    for (const generatedIcon of generatedPack) {
+      icons.push(Object.assign({
+        src: generatedIcon.filename || '',
+        sizes: generatedIcon.resizedImage.dimensions.toString(),
+        type: generatedIcon.resizedImage.type,
+      }, generatedIcon.properties || {}))
+    }
+  }
+  return icons
+}
+
+export function generateManifest (inputManifest: IWebAppManifest, generatedIcons: IGeneratedEngineIcon[][]): IWebAppManifest {
+  const { icons: regularIcons, ...manifest } = inputManifest
+  const icons = combineIconsIntoManifest(regularIcons || [], generatedIcons)
+  return Object.assign({ icons }, manifest)
 }

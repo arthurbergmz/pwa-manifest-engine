@@ -16,6 +16,7 @@ const manifestEngine = new PwaManifestEngine({
     {
       src: getTestingAssetPath('icon.png'),
       sizes: [32],
+      filename: 'ASSET_[size].[hash:6][ext]',
       platform: 'android'
     }
   ]
