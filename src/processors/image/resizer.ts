@@ -4,6 +4,15 @@ import { IImageResizedData, initImageResizedData } from ".";
 import { fileFormatter } from "./formatter";
 import { supportedMimeTypes } from "../../utils";
 
+/**
+ * Resizes images, powered by Jimp.
+ * Supported images: .png, .jpeg, .bmp
+ * 
+ * @param jimpImage 
+ * @param mimeType 
+ * @param width 
+ * @param height 
+ */
 export async function jimpImageResizer (jimpImage: jimp, mimeType: (string | undefined), width: number, height: number): Promise<IImageResizedData> {
   if (!mimeType) {
     mimeType = jimpImage.getMIME()

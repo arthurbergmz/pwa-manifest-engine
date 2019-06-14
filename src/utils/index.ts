@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import crypto from 'crypto'
-import { IImageDimensions } from '../processors/image';
+import { IImageDimensions, IImageTag } from '../processors/image';
 import jimp = require('jimp');
 
 export const supportedMimeTypes: string[] = [jimp.MIME_PNG, jimp.MIME_JPEG, jimp.MIME_BMP]
@@ -29,7 +29,21 @@ export function formatSizesInput (input: (string | number)): Dimension2D {
     const data = (input as string).split('x')
     return { x: +data[0], y: +data[1] }
   } else if (type === 'number') {
-    return { x: (input as number), y: (input as number) }
+    const i = Math.round(input as number)
+    return { x: i, y: i }
   }
   return { x: -1, y: -1 }
+}
+
+export function formatTemplateByImageTags (template: string, imageTags: IImageTag[]): string {
+  return imageTags.reduce((output, tag) => {
+    const applied = tag.key.exec(template)
+    if (applied) {
+      if (tag.transform) {
+        return output.replace(applied[0], tag.transform(tag.value, applied))
+      }
+      return output.replace(applied[0], tag.value)
+    }
+    return output
+  }, template)
 }

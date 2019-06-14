@@ -53,5 +53,7 @@ export function initImageResizedData (buffer: Buffer, mimeType: string, width: n
 }
 
 export interface IImageTag {
-  [key: string]: string;
+  key: RegExp;
+  value: string;
+  transform?: (value: string, applied: RegExpExecArray) => string;
 }

@@ -9,22 +9,26 @@ import { generateFingerprint } from '../../utils';
  */
 export function imageTagger (src: string, imageData?: IImageData): IImageTag[] {
   const parsedPath = path.parse(src)
-  const tags = [{
-    key: 'name',
+  const tags: IImageTag[] = [{
+    key: /\[name\]/gi,
     value: parsedPath.name
   },
   {
-    key: 'ext',
+    key: /\[ext\]/gi,
     value: parsedPath.ext
   }]
   if (imageData) {
     tags.push({
-      key: 'size',
+      key: /\[size\]/gi,
       value: imageData.dimensions.toString()
     },
     {
-      key: 'hash',
-      value: generateFingerprint(imageData.buffer)
+      key: /\[hash(\:\d{1,2})?\]/gi,
+      value: generateFingerprint(imageData.buffer),
+      transform: (value: string, applied: RegExpExecArray): string => {
+        const length = applied[1]
+        return value.substr(0, Math.min((length && +length) || 32, 32))
+      }
     })
   }
   return tags

@@ -24,6 +24,7 @@ export class PwaManifestEngine {
   public async run (): Promise<IEngineOutput> {
     const engineOptions = this._engineConfig.options || defaultConfig.options || {}
     const customIcons = await generateCustomIcons(engineOptions, this._engineConfig.icons)
+    console.log(customIcons)
     return {}
   }
 }

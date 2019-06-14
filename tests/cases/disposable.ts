@@ -21,6 +21,8 @@ const manifestEngine = new PwaManifestEngine({
   ]
 })
 
+console.log('running...')
+
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 manifestEngine.run().then((output) => {
   console.log(JSON.stringify(output))
